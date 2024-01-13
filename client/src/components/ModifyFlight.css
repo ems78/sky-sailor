@@ -1,0 +1,29 @@
+.btndelete {
+  background-color: red;
+  color: white;
+  margin-left: 55px;
+}
+
+.btnupdate {
+  background-color: green;
+  color: white;
+  margin-right: 55px;
+}
+
+.planeid {
+  padding: 150px;
+  margin-bottom: 255px;
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("src/airplane.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

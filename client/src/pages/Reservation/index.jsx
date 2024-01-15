@@ -10,7 +10,7 @@ const ReservationPage = () => {
   const [totalPrice, setTotalPrice] = useState(flight.adultSeatPrice);
 
   return (
-    <Container style={{ maxWidth: "60%", marginTop: "6rem" }}>
+    <Container style={{ width: "900px", marginTop: "2rem" }}>
       <Row className="justify-content-md-center mt-4 pt-4 border p-4">
         <h1>Rezervacija</h1>
         <Col md={6} className="p-8">

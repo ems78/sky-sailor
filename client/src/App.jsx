@@ -31,7 +31,7 @@ const App = () => {
                 </Col>
               </Row>
               <Row className="justify-content-md-center mt-4">
-                <Col md={8}>
+                <Col md={8} style={{ width: "100%"}}>
                   <SearchForm />
                 </Col>
               </Row>

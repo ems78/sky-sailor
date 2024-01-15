@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const AccountForm = () => {
   const [accountData, setAccountData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAccountData = async () => {
@@ -21,9 +23,12 @@ const AccountForm = () => {
         if (response.data.success) {
           setAccountData(response.data.data.account);
           setPhoneNumber(response.data.data.account.phoneNumber || "");
+        } else {
+          navigate("/login");
         }
       } catch (error) {
         console.error("Error fetching account data:", error);
+        navigate("/login");
       } finally {
         setIsLoading(false);
       }
@@ -69,6 +74,10 @@ const AccountForm = () => {
     }
   };
 
+  const handleBackClick = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <Container
@@ -97,14 +106,14 @@ const AccountForm = () => {
         <div
           className="wrapper bg-light p-4"
           style={{ borderRadius: "15px", maxWidth: "600px" }}>
-          <h4 className="pb-4 border-bottom">Account Information</h4>
+          <h4 className="pb-4 border-bottom">Informacije o računu</h4>
           {isLoading ? (
-            <p>Loading account data...</p>
+            <p>Učitavanje podataka o računu...</p>
           ) : accountData ? (
             <div>
               <div className="row py-2">
                 <div className="col-md-6">
-                  <label htmlFor="firstname">First Name</label>
+                  <label htmlFor="firstname">Ime</label>
                   <input
                     type="text"
                     className="bg-light form-control"
@@ -113,7 +122,7 @@ const AccountForm = () => {
                   />
                 </div>
                 <div className="col-md-6 pt-md-0 pt-3">
-                  <label htmlFor="lastname">Last Name</label>
+                  <label htmlFor="lastname">Prezime</label>
                   <input
                     type="text"
                     className="bg-light form-control"
@@ -124,7 +133,7 @@ const AccountForm = () => {
               </div>
               <div className="row py-2">
                 <div className="col-md-6">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="email">Email</label>
                   <input
                     type="text"
                     className="bg-light form-control"
@@ -133,7 +142,7 @@ const AccountForm = () => {
                   />
                 </div>
                 <div className="col-md-6 pt-md-0 pt-3">
-                  <label htmlFor="phone">Phone Number</label>
+                  <label htmlFor="phone">Broj mobitela</label>
                   <input
                     type="tel"
                     className={`bg-light form-control ${
@@ -145,14 +154,17 @@ const AccountForm = () => {
                   />
                   {!isPhoneNumberValid && (
                     <div className="invalid-feedback">
-                      Please enter a valid phone number
+                      Unesite ispravan broj mobitela
                     </div>
                   )}
                 </div>
               </div>
               <div className="py-3 pb-4">
-                <button className="btn btn-primary mr-3" onClick={saveChanges}>
-                  Save Changes
+                <button className="btn btn-primary mx-3" onClick={saveChanges}>
+                  Spremi promjene
+                </button>
+                <button className="btn border button" onClick={handleBackClick}>
+                  Povratak
                 </button>
               </div>
             </div>

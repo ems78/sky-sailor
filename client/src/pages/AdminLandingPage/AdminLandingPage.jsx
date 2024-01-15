@@ -1,4 +1,3 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AdminLandingPage.css";
 import { Link } from "react-router-dom";
@@ -20,12 +19,10 @@ const AdminLandingPage = () => {
 
       <div className="row mt-5">
         <div className="col">
-          
           <Link
             to="/PrvaStranica"
             className="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
-            style={squareButtonStyle}
-          >
+            style={squareButtonStyle}>
             <strong>
               Dodaj <br />
               letove
@@ -36,8 +33,7 @@ const AdminLandingPage = () => {
           <Link
             to="/DrugaStranica"
             className="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
-            style={squareButtonStyle}
-          >
+            style={squareButtonStyle}>
             <strong>
               Promijeni
               <br /> letove

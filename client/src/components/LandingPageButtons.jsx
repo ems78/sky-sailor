@@ -10,7 +10,7 @@ const LandingPageButtons = () => {
         <button className="btn btn-success">Registracija</button>
       </Link>
       <Link to="/account">
-        <button className="btn btn-success">Account</button>
+        <button className="btn btn-success">Račun</button>
       </Link>
     </div>
   );

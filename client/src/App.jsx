@@ -10,6 +10,7 @@ import ResetPasswordForm from "./pages/ResetPassword";
 import ResultsPage from "./pages/Results/ResultsPage";
 import AccountForm from "./pages/Account/AccountForm";
 import ReservationForm from "./pages/Reservation";
+import AdminLandingPage from "./pages/AdminLandingPage/AdminLandingPage"
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/search-results" element={<ResultsPage />} />
         <Route path="/account" element={<AccountForm />} />
         <Route path="/reservation" element={<ReservationForm />} />
+        <Route path="/admin" element={<AdminLandingPage />} />
       </Routes>
     </BrowserRouter>
   );

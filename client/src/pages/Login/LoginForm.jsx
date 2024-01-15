@@ -1,4 +1,14 @@
-const LoginForm = ({ email, password, handleInputChange, handleSubmit, handleRegistrationRedirect, errorMessage, handleResetPasswordRedirect }) => {
+import PropTypes from "prop-types";
+
+const LoginForm = ({
+  email,
+  password,
+  handleInputChange,
+  handleSubmit,
+  handleRegistrationRedirect,
+  errorMessage,
+  handleResetPasswordRedirect,
+}) => {
   return (
     <section className="text-center text-lg-start">
       <style>
@@ -25,15 +35,13 @@ const LoginForm = ({ email, password, handleInputChange, handleSubmit, handleReg
             <div
               className="card cascading-right"
               style={{
-                background: 'hsla(0, 0%, 100%, 0.55)',
-                backdropFilter: 'blur(30px)',
-              }}
-            >
+                background: "hsla(0, 0%, 100%, 0.55)",
+                backdropFilter: "blur(30px)",
+              }}>
               <div className="card-body p-5 shadow-5 text-center">
                 <h2 className="fw-bold mb-5">Login to Your Account</h2>
-                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
-
                   <div className="form-outline mb-4">
                     <input
                       type="email"
@@ -62,23 +70,30 @@ const LoginForm = ({ email, password, handleInputChange, handleSubmit, handleReg
                     </label>
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-block mb-4">
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-block mb-4">
                     Login
                   </button>
 
                   <p className="mb-0">
-                    Don't have an account?{' '}
-                   <button type="button" className="btn btn-link" onClick={handleRegistrationRedirect}>
-                   Sign up
-                   </button>
-                 </p>
-
-                 <p>
-                  <button type="button" className="btn btn-link" onClick={handleResetPasswordRedirect}>
-                  Reset Password
-                  </button>
+                    Don&apos;t have an account?{" "}
+                    <button
+                      type="button"
+                      className="btn btn-link"
+                      onClick={handleRegistrationRedirect}>
+                      Sign up
+                    </button>
                   </p>
 
+                  <p>
+                    <button
+                      type="button"
+                      className="btn btn-link"
+                      onClick={handleResetPasswordRedirect}>
+                      Reset Password
+                    </button>
+                  </p>
                 </form>
               </div>
             </div>
@@ -95,6 +110,16 @@ const LoginForm = ({ email, password, handleInputChange, handleSubmit, handleReg
       </div>
     </section>
   );
+};
+
+LoginForm.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  handleInputChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  handleRegistrationRedirect: PropTypes.func,
+  errorMessage: PropTypes.string,
+  handleResetPasswordRedirect: PropTypes.func,
 };
 
 export default LoginForm;

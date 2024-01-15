@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const CompanyLogo = ({ children }) => {
   return (
@@ -22,6 +23,10 @@ const CompanyLogo = ({ children }) => {
       </div>
     </Container>
   );
+};
+
+CompanyLogo.propTypes = {
+  children: PropTypes.node,
 };
 
 export default CompanyLogo;

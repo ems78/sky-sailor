@@ -1,5 +1,12 @@
-const RegistrationForm = ({ formData, handleInputChange, handleSubmit, handleLoginRedirect, errorMessage }) => {
+import PropTypes from "prop-types";
 
+const RegistrationForm = ({
+  formData,
+  handleInputChange,
+  handleSubmit,
+  handleLoginRedirect,
+  errorMessage,
+}) => {
   return (
     <section className="text-center text-lg-start">
       <style>
@@ -26,13 +33,12 @@ const RegistrationForm = ({ formData, handleInputChange, handleSubmit, handleLog
             <div
               className="card cascading-right"
               style={{
-                background: 'hsla(0, 0%, 100%, 0.55)',
-                backdropFilter: 'blur(30px)',
-              }}
-            >
+                background: "hsla(0, 0%, 100%, 0.55)",
+                backdropFilter: "blur(30px)",
+              }}>
               <div className="card-body p-5 shadow-5 text-center">
                 <h2 className="fw-bold mb-5">Sign up now</h2>
-                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-md-6 mb-4">
@@ -95,17 +101,21 @@ const RegistrationForm = ({ formData, handleInputChange, handleSubmit, handleLog
                     </label>
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-block mb-4"  >
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-block mb-4">
                     Sign up
                   </button>
 
                   <p className="mb-0">
-                    Already have an account?{' '}
-                    <button type="button" className="btn btn-link" onClick={handleLoginRedirect}>
+                    Already have an account?{" "}
+                    <button
+                      type="button"
+                      className="btn btn-link"
+                      onClick={handleLoginRedirect}>
                       Login
                     </button>
                   </p>
-
                 </form>
               </div>
             </div>
@@ -122,6 +132,14 @@ const RegistrationForm = ({ formData, handleInputChange, handleSubmit, handleLog
       </div>
     </section>
   );
+};
+
+RegistrationForm.propTypes = {
+  formData: PropTypes.object.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleLoginRedirect: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 export default RegistrationForm;

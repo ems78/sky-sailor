@@ -34,8 +34,9 @@ describe("Town controller test cases", () => {
       },
     });
 
-    expect(db.promise().query).toHaveBeenCalledWith( // don't format query - tests fail if you do
-`SELECT town_ID, name
+    expect(db.promise().query).toHaveBeenCalledWith(
+      // don't format query - tests fail if you do
+      `SELECT town_ID, name
         FROM town 
         WHERE LOWER(name) LIKE LOWER(CONCAT(?, '%'))
         LIMIT 5`,
@@ -55,8 +56,9 @@ describe("Town controller test cases", () => {
       message: "database error",
     });
 
-    expect(db.promise().query).toHaveBeenCalledWith( // don't format query - tests fail if you do
-`SELECT town_ID, name
+    expect(db.promise().query).toHaveBeenCalledWith(
+      // don't format query - tests fail if you do
+      `SELECT town_ID, name
         FROM town 
         WHERE LOWER(name) LIKE LOWER(CONCAT(?, '%'))
         LIMIT 5`,

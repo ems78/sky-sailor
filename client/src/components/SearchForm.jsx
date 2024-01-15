@@ -120,7 +120,7 @@ const SearchForm = () => {
   };
 
   return (
-    <div className="container mt-3" style={{ maxWidth: "40%" }}>
+    <div className="container mt-3">
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="departureTown" className="form-label">
@@ -198,9 +198,11 @@ const SearchForm = () => {
         </div>
         <p className="text-danger font-weight-bold">{formError}</p>
 
-        <button type="submit" className="btn btn-primary">
-          Pretraži letove
-        </button>
+        <div className="d-flex justify-content-center">
+          <button type="submit" className="btn btn-primary w-100">
+            Pretraži letove
+          </button>
+        </div>
       </form>
     </div>
   );

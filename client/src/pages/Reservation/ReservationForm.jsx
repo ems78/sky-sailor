@@ -27,7 +27,6 @@ const ReservationForm = ({ flight, setTotalPrice }) => {
         const token = localStorage.getItem("token");
 
         if (!token) {
-          console.log("Failed to fetch account: No token");
           navigate("/login");
           return;
         }
@@ -39,7 +38,6 @@ const ReservationForm = ({ flight, setTotalPrice }) => {
         });
 
         if (response.status === 401) {
-          console.log("Failed to fetch account:", response);
           navigate("/login");
           return;
         }
@@ -51,7 +49,6 @@ const ReservationForm = ({ flight, setTotalPrice }) => {
           }));
         }
       } catch (err) {
-        console.log("Failed to fetch account:", err);
         navigate("/login");
       }
     };
@@ -211,7 +208,6 @@ const ReservationForm = ({ flight, setTotalPrice }) => {
       formData
     );
 
-    console.log(response);
     if (response.status === 201) {
       window.alert("Uspješno ste rezervirali kartu!");
       navigate("/");

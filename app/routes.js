@@ -1,5 +1,4 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 
 const homeController = require("./controllers/homeController");
 const flightController = require("./controllers/flightController");

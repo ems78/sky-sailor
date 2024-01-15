@@ -1,5 +1,5 @@
-import LoginForm from './LoginForm'; 
-import useLogin from './useLogin'; 
+import LoginForm from "./LoginForm";
+import useLogin from "./useLogin";
 
 const LoginPage = () => {
   const {
@@ -8,9 +8,9 @@ const LoginPage = () => {
     errorMessage,
     handleInputChange,
     handleSubmit,
-    handleRegistrationRedirect, 
-    handleResetPasswordRedirect
-  } = useLogin(); 
+    handleRegistrationRedirect,
+    handleResetPasswordRedirect,
+  } = useLogin();
 
   return (
     <div>
@@ -19,9 +19,9 @@ const LoginPage = () => {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         handleRegistrationRedirect={handleRegistrationRedirect}
-        handleResetPasswordRedirect={handleResetPasswordRedirect} 
+        handleResetPasswordRedirect={handleResetPasswordRedirect}
         errorMessage={errorMessage}
-        isLoggedIn={isLoggedIn} 
+        isLoggedIn={isLoggedIn}
       />
     </div>
   );

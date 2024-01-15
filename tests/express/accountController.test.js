@@ -12,7 +12,6 @@ jest.mock("../../app/database", () => ({
   connect: jest.fn(),
 }));
 
-
 const mockUserData = {
   email: "test@example.com",
   password: "password123",
@@ -25,20 +24,17 @@ const mockAdminData = {
   passwordHash: "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
 };
 
-
 describe("User Controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("should sign up a new user", async () => {
-    db.promise().query
-      .mockResolvedValueOnce([[]])
+    db.promise()
+      .query.mockResolvedValueOnce([[]])
       .mockResolvedValueOnce([{ affectedRows: 1 }]);
 
-    const response = await request(app)
-      .post("/api/signup")
-      .send(mockUserData);
+    const response = await request(app).post("/api/signup").send(mockUserData);
 
     expect(response.status).toBe(201);
     expect(response.body.success).toBe(true);
@@ -47,14 +43,14 @@ describe("User Controller", () => {
 
   it("should handle existing user during sign up", async () => {
     db.promise().query.mockResolvedValueOnce([{ length: 1 }]);
-  
-    const response = await request(app)
-      .post("/api/signup")
-      .send(mockUserData);
-  
+
+    const response = await request(app).post("/api/signup").send(mockUserData);
+
     expect(response.status).toBe(409);
     expect(response.body.success).toBe(false);
-    expect(response.body.error).toBe("Email is already registered. Please log in.");
+    expect(response.body.error).toBe(
+      "Email is already registered. Please log in."
+    );
   });
 
   it("should get all accounts", async () => {
@@ -105,7 +101,8 @@ describe("User Controller", () => {
   it("should handle successful account addition", async () => {
     const mockAccountData = {
       email: "newaccount@example.com",
-      passwordHash: "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
+      passwordHash:
+        "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
       firstName: "New",
       lastName: "Account",
     };
@@ -123,7 +120,8 @@ describe("User Controller", () => {
   it("should handle failed account addition", async () => {
     const mockAccountData = {
       email: "newaccount@example.com",
-      passwordHash: "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
+      passwordHash:
+        "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
       firstName: "New",
       lastName: "Account",
     };
@@ -149,12 +147,10 @@ describe("Login Function", () => {
     db.promise().query.mockResolvedValueOnce([[mockAdminData]]);
     bcrypt.compare.mockResolvedValueOnce(true);
 
-    const response = await request(app)
-      .post("/api/login")
-      .send({
-        email: mockAdminData.email,
-        password: "password123",
-      });
+    const response = await request(app).post("/api/login").send({
+      email: mockAdminData.email,
+      password: "password123",
+    });
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -165,29 +161,24 @@ describe("Login Function", () => {
     const inactiveAdmin = { ...mockAdminData, active: false };
     db.promise().query.mockResolvedValueOnce([[inactiveAdmin]]);
 
-    const response = await request(app)
-        .post("/api/login")
-        .send({
-            email: inactiveAdmin.email,
-            password: "password123",
-        });
+    const response = await request(app).post("/api/login").send({
+      email: inactiveAdmin.email,
+      password: "password123",
+    });
 
     expect(response.status).toBe(401);
     expect(response.body.success).toBe(false);
     expect(response.body.error).toBe("Invalid login credentials.");
-});
-
+  });
 
   it("should login a user successfully", async () => {
     db.promise().query.mockResolvedValueOnce([[mockUserData]]);
     bcrypt.compare.mockResolvedValueOnce(true);
 
-    const response = await request(app)
-      .post("/api/login")
-      .send({
+    const response = await request(app).post("/api/login").send({
       email: "nonexistent@example.com",
       password: "password123",
-  });
+    });
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -198,12 +189,10 @@ describe("Login Function", () => {
     db.promise().query.mockResolvedValueOnce([[mockUserData]]);
     bcrypt.compare.mockResolvedValueOnce(false);
 
-    const response = await request(app)
-      .post("/api/login")
-      .send({
-        email: mockUserData.email,
-        password: "wrongPassword",
-      });
+    const response = await request(app).post("/api/login").send({
+      email: mockUserData.email,
+      password: "wrongPassword",
+    });
 
     expect(response.status).toBe(401);
     expect(response.body.success).toBe(false);
@@ -213,12 +202,10 @@ describe("Login Function", () => {
   it("should handle internal server error", async () => {
     db.promise().query.mockRejectedValueOnce(new Error("Database error"));
 
-    const response = await request(app)
-      .post("/api/login")
-      .send({
-        email: mockAdminData.email,
-        password: "password123",
-      });
+    const response = await request(app).post("/api/login").send({
+      email: mockAdminData.email,
+      password: "password123",
+    });
 
     expect(response.status).toBe(500);
     expect(response.body.success).toBe(false);
@@ -233,20 +220,19 @@ describe("Password Reset Function", () => {
   it("should reset password successfully", async () => {
     const mockUser = {
       email: "test@example.com",
-      passwordHash: "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
+      passwordHash:
+        "$2b$10$N2iPH/HoBJqLMthU6eC0GeaVSxSNSE3jKL.IJqffsJt9RvvvHw/Wm",
     };
 
-    db.promise().query
-      .mockResolvedValueOnce([[mockUser]])
+    db.promise()
+      .query.mockResolvedValueOnce([[mockUser]])
       .mockResolvedValueOnce([{ affectedRows: 1 }]);
-    bcrypt.hash.mockResolvedValueOnce('hashedPassword');
+    bcrypt.hash.mockResolvedValueOnce("hashedPassword");
 
-    const response = await request(app)
-      .post("/api/reset-password")
-      .send({
-        email: "test@example.com",
-        newPassword: "newPassword",
-      });
+    const response = await request(app).post("/api/reset-password").send({
+      email: "test@example.com",
+      newPassword: "newPassword",
+    });
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -256,19 +242,16 @@ describe("Password Reset Function", () => {
   it("should handle user not found during password reset", async () => {
     db.promise().query.mockResolvedValueOnce([[]]);
 
-    const response = await request(app)
-      .post("/api/reset-password")
-      .send({
-        email: "nonexistent@example.com",
-        newPassword: "newPassword",
-      });
+    const response = await request(app).post("/api/reset-password").send({
+      email: "nonexistent@example.com",
+      newPassword: "newPassword",
+    });
 
     expect(response.status).toBe(404);
     expect(response.body.success).toBe(false);
     expect(response.body.error).toBe("User not found");
   });
 });
-
 
 describe("Account Routes", () => {
   it("should return 401 for requests without a token", async () => {
@@ -295,7 +278,7 @@ describe("Account Routes", () => {
     expect(response.body.success).toBe(false);
     expect(response.body.error).toBe("Forbidden: Invalid token");
 
-    expect(verifySpy).toHaveBeenCalledWith(invalidToken, 'shared_secret_key');
+    expect(verifySpy).toHaveBeenCalledWith(invalidToken, "shared_secret_key");
   });
 });
 

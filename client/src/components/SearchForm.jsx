@@ -10,6 +10,7 @@ const SearchForm = () => {
   const [townSearchResults, setTownSearchResults] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [activeInput, setActiveInput] = useState(null);
+  const [formError, setFormError] = useState("");
   const navigate = useNavigate();
 
   const debounce = (func, delay) => {
@@ -70,33 +71,56 @@ const SearchForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setFormError("");
+
     const departureTownId = await getTownIdByName(departureTown);
     const destinationTownId = await getTownIdByName(destinationTown);
 
-    if (departureTownId && destinationTownId) {
-      const response = await axios.get(`http://localhost:8800/api/search`, {
-        params: {
-          departureTownId: departureTownId,
-          destinationTownId: destinationTownId,
-          departureDate: departureDate,
-        },
-      });
+    if (!departureTownId) {
+      setFormError("Mjesto polijetanja nije pronađeno.");
+      return;
+    }
 
-      const data = response.data;
-      if (data.status === "success") {
-        navigate("/search-results", {
-          state: { flights: data.data.flights },
-        });
-      } else {
-        console.error("Search failed", data);
-      }
+    if (!destinationTownId) {
+      setFormError("Mjesto slijetanja nije pronađeno.");
+      return;
+    }
+
+    const departureDateParts = departureDate.split("-");
+    const departureDateTime = new Date(
+      departureDateParts[0],
+      departureDateParts[1] - 1,
+      departureDateParts[2]
+    );
+
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Postavljamo sate, minute, sekunde i milisekunde na nulu
+
+    if (departureDateTime < currentDate) {
+      setFormError("Datum polijetanja ne može biti u prošlosti.");
+      return;
+    }
+
+    const response = await axios.get(`http://localhost:8800/api/search`, {
+      params: {
+        departureTownId: departureTownId,
+        destinationTownId: destinationTownId,
+        departureDate: departureDate,
+      },
+    });
+
+    const data = response.data;
+    if (data.status === "success") {
+      navigate("/search-results", {
+        state: { flights: data.data.flights },
+      });
     } else {
-      console.error("One of the towns could not be found by name.");
+      console.error("Search failed", data);
     }
   };
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3" style={{ maxWidth: "40%" }}>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="departureTown" className="form-label">
@@ -172,6 +196,7 @@ const SearchForm = () => {
             required
           />
         </div>
+        <p className="text-danger font-weight-bold">{formError}</p>
 
         <button type="submit" className="btn btn-primary">
           Pretraži letove

@@ -1,9 +1,7 @@
-// ResetPasswordForm.jsx
-
-import React from 'react';
+import PropTypes from "prop-types";
 
 const ResetPasswordForm = ({
-  formData: { email, newPassword, confirmPassword },  
+  formData: { email, newPassword, confirmPassword },
   handleInputChange,
   handleSubmit,
   handleLoginRedirect,
@@ -36,13 +34,12 @@ const ResetPasswordForm = ({
             <div
               className="card cascading-right"
               style={{
-                background: 'hsla(0, 0%, 100%, 0.55)',
-                backdropFilter: 'blur(30px)',
-              }}
-            >
+                background: "hsla(0, 0%, 100%, 0.55)",
+                backdropFilter: "blur(30px)",
+              }}>
               <div className="card-body p-5 shadow-5 text-center">
                 <h2 className="fw-bold mb-5">Reset Your Password</h2>
-                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
                   <div className="form-outline mb-4">
                     <input
@@ -86,20 +83,28 @@ const ResetPasswordForm = ({
                     </label>
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-block mb-4">
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-block mb-4">
                     Reset
                   </button>
 
                   <p className="mb-0">
-                    Back to login{' '}
-                    <button type="button" className="btn btn-link" onClick={handleLoginRedirect}>
+                    Back to login{" "}
+                    <button
+                      type="button"
+                      className="btn btn-link"
+                      onClick={handleLoginRedirect}>
                       Log in
                     </button>
                   </p>
 
                   <p className="mb-0">
-                    Don't have an account?{' '}
-                    <button type="button" className="btn btn-link" onClick={handleRegistrationRedirect}>
+                    Don&apos;t have an account?{" "}
+                    <button
+                      type="button"
+                      className="btn btn-link"
+                      onClick={handleRegistrationRedirect}>
                       Sign up
                     </button>
                   </p>
@@ -119,6 +124,15 @@ const ResetPasswordForm = ({
       </div>
     </section>
   );
+};
+
+ResetPasswordForm.propTypes = {
+  formData: PropTypes.object.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleLoginRedirect: PropTypes.func.isRequired,
+  handleRegistrationRedirect: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
 export default ResetPasswordForm;

@@ -1,5 +1,5 @@
-import ResetPasswordForm from './ResetPasswordForm'; 
-import useResetPassword from './useResetPassword'; 
+import ResetPasswordForm from "./ResetPasswordForm";
+import useResetPassword from "./useResetPassword";
 
 const ResetPassword = () => {
   const {
@@ -8,8 +8,8 @@ const ResetPassword = () => {
     handleInputChange,
     handleSubmit,
     handleLoginRedirect,
-    handleRegistrationRedirect
-  } = useResetPassword(); 
+    handleRegistrationRedirect,
+  } = useResetPassword();
 
   return (
     <div>

@@ -1,5 +1,5 @@
-import RegistrationForm from './RegistrationForm';
-import useRegistration from './UseRegistration';
+import RegistrationForm from "./RegistrationForm";
+import useRegistration from "./UseRegistration";
 
 const RegistrationPage = () => {
   const {
@@ -18,7 +18,7 @@ const RegistrationPage = () => {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         handleLoginRedirect={handleLoginRedirect}
-        errorMessage={errorMessage} 
+        errorMessage={errorMessage}
         isRegistered={isRegistered}
       />
     </div>

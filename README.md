@@ -9,31 +9,60 @@ Projekt je rađen za kolegij *Uvod u programsko inženjerstvo* na Prirodoslovno-
 - **Prijava i Registracija:** Omogućava korisnicima stvaranje računa i prijavu na sustav, te administratorima prijavu.
 - **Pretraga Letova:** Brza pretraga dostupnih letova prema različitim kriterijima poput polazišta, destinacije i datuma.
 - **Rezervacija Karata:** Jednostavan proces rezervacije karata nakon odabira željenog leta.
-- **Administrativne Funkcionalnosti:** Omogućuje administratorima dodavanje i ažuriranje informacija o letovima.
+- ~~**Administrativne Funkcionalnosti:** Omogućuje administratorima dodavanje i ažuriranje informacija o letovima.~~
 
 ## Postavljanje Projekta
 
-1. **Preuzimanje Koda:**
+1. **Instalacija MySQL:**
+
+   Prvo, instalirajte MySQL i MySQL Workbench na svoj sustav. Posjetite MySQL web stranicu za upute o instalaciji.
+
+2. **Inicijalizacija Baze Podataka:**
+   
+   Otvorite MySQL Workbench i prijavite se s vlastitim korisničkim imenom i lozinkom.
+   Nakon uspješne prijave, skriptu `init.sql` (shift + ctrl + o).
+   Izvršite upit kako biste stvorili potrebne tablice i popunili ih početnim podacima.
+   Nakon izvršenja skripte, vaša baza podataka trebala bi biti inicijalizirana.
+
+3. **Preuzimanje Koda:**
    ```bash
    git clone https://github.com/ems78/sky-sailor.git
    cd sky-sailor
    ```
 
-2. **Instalacija Zavisnosti:**
+4. **Spremanje Procedura u Bazu Podataka:**
+
+   U MySql Workbench otvorite skripte za kreaciju procedura koje su u projektu u direktoriju `app/sql/` i izvršite ih.
+
+5. **Instalacija Zavisnosti:**
+
+   Otvorite projekt u VSCode (ili drugom IDE po vašem izboru). Dok ste pozicionirani u root direktoriju projekta:
    ```bash
    npm install
    cd client/
    npm install
    ```
 
-3. **Pokretanje Express Servera:**
+6. **Konfiguracija .env Datoteke:**
    
-   Dok ste pozicionirani u root folderu
+   Nakon instalacije dependencija, stvorite .env datoteku u glavnom direktoriju projekta. Definirajte sljedeće varijable s odgovarajućim vrijednostima, prema postavkama koje ste odabrali prilikom instalacije MySQL-a:
+
+   ```
+   DB_HOST=localhost
+   DB_USER=<user>
+   DB_PASS=<password>
+   DB_NAME=aviokompanija
+   PORT=<port>
+   ```
+
+7. **Pokretanje Express Servera:**
+   
+   Dok ste pozicionirani u root direktoriju
    ```bash
    npm start
    ```
 
-4. **Pokretanje React Aplikacije:**
+8. **Pokretanje React Aplikacije:**
     
     Otvorite drugi terminal
     ```bash
@@ -41,7 +70,7 @@ Projekt je rađen za kolegij *Uvod u programsko inženjerstvo* na Prirodoslovno-
     npm run dev
     ```
 
-Aplikacija će biti dostupna na http://localhost:8800.
+Aplikacija će biti dostupna na `http://localhost:<port>`, port koji ste definirali u `.env`.
 
 ## Tehnologije Korištene
 
@@ -65,4 +94,4 @@ Ovaj projekt je licenciran pod MIT licencom - pogledajte [LICENSE.md](LICENSE.md
 
 ## Napomena
 
-Projekt ne sadrži skriptu za stvaranje baze podataka. Preporučujemo dodavanje skripte ručno postavljanje baze podataka prije pokretanja projekta.
+Baza ima malo podataka, a za testiranje pretrage letova možete pretražiti letove na relaciji Berlin - Munchen na datum 22.2.2024.

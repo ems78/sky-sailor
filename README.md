@@ -13,22 +13,22 @@ Projekt je rađen za kolegij *Uvod u programsko inženjerstvo* na Prirodoslovno-
 
 ## Postavljanje Projekta
 
-1. **Instalacija MySQL:**
-
-   Prvo, instalirajte MySQL i MySQL Workbench na svoj sustav. Posjetite MySQL web stranicu za upute o instalaciji.
-
-2. **Inicijalizacija Baze Podataka:**
-   
-   Otvorite MySQL Workbench i prijavite se s vlastitim korisničkim imenom i lozinkom.
-   Nakon uspješne prijave, skriptu `init.sql` (shift + ctrl + o).
-   Izvršite upit kako biste stvorili potrebne tablice i popunili ih početnim podacima.
-   Nakon izvršenja skripte, vaša baza podataka trebala bi biti inicijalizirana.
-
-3. **Preuzimanje Koda:**
+1. **Preuzimanje Koda:**
    ```bash
    git clone https://github.com/ems78/sky-sailor.git
    cd sky-sailor
    ```
+
+2. **Instalacija MySQL:**
+
+   Instalirajte MySQL i MySQL Workbench na svoj sustav. Posjetite MySQL web stranicu za upute o instalaciji.
+
+3. **Inicijalizacija Baze Podataka:**
+   
+   Otvorite MySQL Workbench i prijavite se s vlastitim korisničkim imenom i lozinkom.
+   Nakon uspješne prijave, otovrite skriptu `init.sql` iz direktorija projekta (`app/sql/`).
+   Izvršite upit kako biste stvorili potrebne tablice i popunili ih početnim podacima.
+   Nakon izvršenja skripte, vaša baza podataka trebala bi biti inicijalizirana.
 
 4. **Spremanje Procedura u Bazu Podataka:**
 

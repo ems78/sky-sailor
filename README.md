@@ -52,7 +52,7 @@ Projekt je rađen za kolegij *Uvod u programsko inženjerstvo* na Prirodoslovno-
    DB_USER=<user>
    DB_PASS=<password>
    DB_NAME=aviokompanija
-   PORT=<port>
+   PORT=8800
    ```
 
 7. **Pokretanje Express Servera:**
@@ -70,7 +70,7 @@ Projekt je rađen za kolegij *Uvod u programsko inženjerstvo* na Prirodoslovno-
     npm run dev
     ```
 
-Aplikacija će biti dostupna na `http://localhost:<port>`, port koji ste definirali u `.env`.
+Aplikacija će biti dostupna na `http://localhost:8800`.
 
 ## Tehnologije Korištene
 
